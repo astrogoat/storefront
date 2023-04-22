@@ -2,11 +2,11 @@
 
 namespace Astrogoat\Storefront;
 
+use Astrogoat\Storefront\Settings\StorefrontSettings;
 use Helix\Lego\Apps\App;
 use Helix\Lego\LegoManager;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Astrogoat\Storefront\Settings\StorefrontSettings;
 
 class StorefrontServiceProvider extends PackageServiceProvider
 {
