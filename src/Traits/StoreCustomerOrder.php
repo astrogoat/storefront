@@ -25,7 +25,7 @@ trait StoreCustomerOrder
     {
         $payment = StorePayment::where('reference', $reference)->first();
 
-        if(!is_null($payment)) {
+        if(! is_null($payment)) {
             $payment->status = $status;
             $payment->method = $channel;
             $payment->bank = $bank;
@@ -35,6 +35,7 @@ trait StoreCustomerOrder
 
             return true;
         }
+
         return false;
     }
 
@@ -49,7 +50,7 @@ trait StoreCustomerOrder
             'customer_city' => $this->address['city'],
             'customer_state' => $this->address['state'],
             'customer_country' => $this->address['country'],
-            'reference' => $transactionReference
+            'reference' => $transactionReference,
         ]);
 
         // save payment
@@ -58,7 +59,7 @@ trait StoreCustomerOrder
             'status' => 'pending',
             'amount' => $this->getTotal() * 100,
             'method' => 'momo',
-            'reference' => $transactionReference
+            'reference' => $transactionReference,
         ]);
 
         // save order_products
@@ -66,7 +67,7 @@ trait StoreCustomerOrder
             StoreOrderStoreProduct::create([
                 'order_id' => $order->id,
                 'product_id' => $item->id,
-                'quantity' => 1
+                'quantity' => 1,
             ]);
         }
     }

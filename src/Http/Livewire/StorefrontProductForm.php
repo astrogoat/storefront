@@ -55,7 +55,7 @@ class StorefrontProductForm extends Form
         return 'storefront::models.products.form';
     }
 
-    public function model() : string
+    public function model(): string
     {
         return Product::class;
     }
@@ -65,7 +65,7 @@ class StorefrontProductForm extends Form
         return Footer::all()->pluck('title', 'id');
     }
 
-    public function getPublishableModel() : Publishable
+    public function getPublishableModel(): Publishable
     {
         return $this->model;
     }

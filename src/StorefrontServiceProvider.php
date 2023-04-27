@@ -2,15 +2,16 @@
 
 namespace Astrogoat\Storefront;
 
+use Astrogoat\Storefront\Http\Livewire\StorefrontCollectionForm;
+use Astrogoat\Storefront\Http\Livewire\StorefrontCollectionIndex;
 use Astrogoat\Storefront\Http\Livewire\StorefrontOrderForm;
 use Astrogoat\Storefront\Http\Livewire\StorefrontOrderIndex;
 use Astrogoat\Storefront\Http\Livewire\StorefrontProductForm;
 use Astrogoat\Storefront\Http\Livewire\StorefrontProductIndex;
-use Astrogoat\Storefront\Http\Livewire\StorefrontCollectionForm;
-use Astrogoat\Storefront\Http\Livewire\StorefrontCollectionIndex;
 use Astrogoat\Storefront\Models\Collection;
 use Astrogoat\Storefront\Models\Product;
 use Astrogoat\Storefront\Models\StoreOrder;
+use Astrogoat\Storefront\Settings\StorefrontSettings;
 use Helix\Fabrick\Icon;
 use Helix\Lego\Apps\App;
 use Helix\Lego\LegoManager;
@@ -20,7 +21,6 @@ use Helix\Lego\Menus\Menu;
 use Livewire\Livewire;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Astrogoat\Storefront\Settings\StorefrontSettings;
 
 class StorefrontServiceProvider extends PackageServiceProvider
 {
