@@ -2,9 +2,9 @@
 
 namespace Astrogoat\Storefront\Settings;
 
+use Astrogoat\Storefront\Actions\StorefrontAction;
 use Helix\Lego\Settings\AppSettings;
 use Illuminate\Validation\Rule;
-use Astrogoat\Storefront\Actions\StorefrontAction;
 
 class StorefrontSettings extends AppSettings
 {
