@@ -2,22 +2,15 @@
 
 namespace Astrogoat\Storefront\Http\Livewire;
 
-use Astrogoat\Storefront\Models\Collection;
 use Astrogoat\Storefront\Models\Product;
 use Astrogoat\Storefront\Models\StoreOrder;
 use Astrogoat\Storefront\Models\StoreOrderStoreProduct;
 use Astrogoat\Storefront\Models\StorePayment;
 use Helix\Lego\Http\Livewire\Models\Form;
-use Helix\Lego\Http\Livewire\Traits\CanBePublished;
-use Helix\Lego\Models\Contracts\Publishable;
-use Helix\Lego\Models\Footer;
-use Helix\Lego\Rules\SlugRule;
 use Illuminate\Support\Collection as SupportCollection;
-use Illuminate\Support\Str;
 
 class StorefrontOrderCreateForm extends Form
 {
-
     public SupportCollection $selectedProducts;
     public array $selectedProductsIds = [];
 
@@ -47,7 +40,7 @@ class StorefrontOrderCreateForm extends Form
     {
         $this->setModel($storeOrder);
 
-        $this->model->reference = sprintf('%s%07s%02s',now()->format('ymd'),'o', 'n');
+        $this->model->reference = sprintf('%s%07s%02s', now()->format('ymd'), 'o', 'n');
 
         $this->selectedProducts = collect([]);
     }
@@ -57,13 +50,14 @@ class StorefrontOrderCreateForm extends Form
         //
     }
 
-    public function saved() {
+    public function saved()
+    {
         // save products
         foreach($this->selectedProductsIds as $productsId) {
             StoreOrderStoreProduct::create([
                'order_id' => $this->model->id,
                'product_id' => $productsId,
-                'quantity' => 1
+                'quantity' => 1,
             ]);
         }
 
@@ -87,7 +81,7 @@ class StorefrontOrderCreateForm extends Form
         parent::updated($property, $value);
     }
 
-    protected function getProductsForCollectionCombobox() : array
+    protected function getProductsForCollectionCombobox(): array
     {
         return Product::all()->map(fn (Product $product) => [
             'key' => $product->id,
@@ -130,7 +124,7 @@ class StorefrontOrderCreateForm extends Form
         return 'storefront::models.orders.create';
     }
 
-    public function model() : string
+    public function model(): string
     {
         return StoreOrder::class;
     }

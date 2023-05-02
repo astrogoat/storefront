@@ -2,25 +2,17 @@
 
 namespace Astrogoat\Storefront\Http\Livewire;
 
-use Astrogoat\Storefront\Models\StoreOrder;
 use Astrogoat\Storefront\Models\StoreSale;
 use Helix\Lego\Http\Livewire\Models\Form;
-use Helix\Lego\Models\Footer;
-use Helix\Lego\Rules\SlugRule;
-use Illuminate\Support\Collection as SupportCollection;
-use LaravelDaily\Invoices\Classes\Buyer;
-use LaravelDaily\Invoices\Classes\InvoiceItem;
-use LaravelDaily\Invoices\Invoice;
 
 class StorefrontSaleForm extends Form
 {
-
-//    public $status;
+    //    public $status;
 
     public function rules()
     {
         return [
-            'model.order.status' => 'required'
+            'model.order.status' => 'required',
         ];
     }
 
@@ -38,8 +30,8 @@ class StorefrontSaleForm extends Form
 
     public function saving()
     {
-            $sale = StoreSale::where('order_id', $this->model->order->id)->first();
-            $sale->delete();
+        $sale = StoreSale::where('order_id', $this->model->order->id)->first();
+        $sale->delete();
     }
 
     public function updated($property, $value)
@@ -52,7 +44,7 @@ class StorefrontSaleForm extends Form
         return 'storefront::models.sales.form';
     }
 
-    public function model() : string
+    public function model(): string
     {
         return StoreSale::class;
     }
@@ -66,5 +58,4 @@ class StorefrontSaleForm extends Form
 
         return $payments->first()->status === 'success';
     }
-
 }

@@ -4,32 +4,30 @@ namespace Astrogoat\Storefront\Http\Controllers;
 
 use Astrogoat\Storefront\Models\StoreOrder;
 use Helix\Lego\Settings\ContactInformationSettings;
-use LaravelDaily\Invoices\Classes\Buyer;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
 
 class StorefrontOrderController
 {
-
     public function invoice(StoreOrder $storeOrder)
     {
         $client = new Party([
-            'name'          => 'Roosevelt Lloyd',
-            'phone'         => app(ContactInformationSettings::class)->contact_phone_number,
+            'name' => 'Roosevelt Lloyd',
+            'phone' => app(ContactInformationSettings::class)->contact_phone_number,
             'custom_fields' => [
                 'email' => app(ContactInformationSettings::class)->contact_email,
-                'address' => app(ContactInformationSettings::class)->address
+                'address' => app(ContactInformationSettings::class)->address,
             ],
         ]);
 
         $customer = new Party([
-            'name'          => $storeOrder->customer_name,
-            'phone'          => $storeOrder->customer_phone,
+            'name' => $storeOrder->customer_name,
+            'phone' => $storeOrder->customer_phone,
             'custom_fields' => [
-                'email'          => $storeOrder->customer_email,
+                'email' => $storeOrder->customer_email,
                 'order number' => $storeOrder->reference,
-                'address'       => $storeOrder->customer_street . ', ' . $storeOrder->customer_city . ', ' . $storeOrder->customer_state . ', ' . $storeOrder->customer_country,
+                'address' => $storeOrder->customer_street . ', ' . $storeOrder->customer_city . ', ' . $storeOrder->customer_state . ', ' . $storeOrder->customer_country,
             ],
         ]);
 
@@ -59,9 +57,9 @@ class StorefrontOrderController
             ->currencyDecimalPoint('.')
             ->filename($client->name . ' ' . $customer->name)
             ->notes($notes);
-//            ->logo(public_path('vendor/invoices/sample-logo.png'))
-            // You can additionally save generated invoice to configured disk
-//            ->save('public');
+        //            ->logo(public_path('vendor/invoices/sample-logo.png'))
+        // You can additionally save generated invoice to configured disk
+        //            ->save('public');
 
         foreach ($storeOrder->orderedProducts as $orderedProduct) {
             $item = (new InvoiceItem())
@@ -69,19 +67,19 @@ class StorefrontOrderController
 //                ->description('Your product or service description')
                 ->pricePerUnit($orderedProduct->product->price)
                 ->quantity(1);
-//                [
-//                (new InvoiceItem())
-//                    ->title('Service 1')
-//                    ->description('Your product or service description')
-//                    ->pricePerUnit(47.79)
-//                    ->quantity(1),
-//            (new InvoiceItem())->title('Service 2')->pricePerUnit(71.96)->quantity(2),
-//            (new InvoiceItem())->title('Service 4')->pricePerUnit(87.51)->quantity(7)->discount(4)->units('kg'),
-//            (new InvoiceItem())->title('Service 5')->pricePerUnit(71.09)->quantity(7)->discountByPercent(9),
-//            (new InvoiceItem())->title('Service 9')->pricePerUnit(33.24)->quantity(6)->units('m2'),
-//            (new InvoiceItem())->title('Service 14')->pricePerUnit(160)->units('hours'),
-//            (new InvoiceItem())->title('Service 20')->pricePerUnit(55.80),
-//            ];
+            //                [
+            //                (new InvoiceItem())
+            //                    ->title('Service 1')
+            //                    ->description('Your product or service description')
+            //                    ->pricePerUnit(47.79)
+            //                    ->quantity(1),
+            //            (new InvoiceItem())->title('Service 2')->pricePerUnit(71.96)->quantity(2),
+            //            (new InvoiceItem())->title('Service 4')->pricePerUnit(87.51)->quantity(7)->discount(4)->units('kg'),
+            //            (new InvoiceItem())->title('Service 5')->pricePerUnit(71.09)->quantity(7)->discountByPercent(9),
+            //            (new InvoiceItem())->title('Service 9')->pricePerUnit(33.24)->quantity(6)->units('m2'),
+            //            (new InvoiceItem())->title('Service 14')->pricePerUnit(160)->units('hours'),
+            //            (new InvoiceItem())->title('Service 20')->pricePerUnit(55.80),
+            //            ];
 
             $invoice->addItem($item);
         }
@@ -97,5 +95,4 @@ class StorefrontOrderController
     {
 
     }
-
 }
