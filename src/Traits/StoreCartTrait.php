@@ -2,11 +2,9 @@
 
 namespace Astrogoat\Storefront\Traits;
 
-use Astrogoat\Cart\CartItem;
 use Astrogoat\Storefront\Models\Product;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Route;
 
 trait StoreCartTrait
 {
@@ -21,12 +19,14 @@ trait StoreCartTrait
     public function getSubTotal(): float
     {
         $total = $this->getItems()->sum('price');
+
         return $total;
     }
 
     public function getTotal(): float
     {
         $total = $this->getItems()->sum('price');
+
         return $total;
     }
 
@@ -49,6 +49,7 @@ trait StoreCartTrait
         ]);
 
         Cache::put($this->cartKey, $emptyCart);
+
         return $emptyCart;
     }
 
@@ -57,7 +58,7 @@ trait StoreCartTrait
         $updatedCartItems = $this->getItems()->put($product->id, $product);
         $updatedContent = $this->getContent()->put('items', $updatedCartItems);
 
-//        $this->clearCache();
+        //        $this->clearCache();
         $this->saveCart($updatedContent);
 
         // Redirect to  cart page

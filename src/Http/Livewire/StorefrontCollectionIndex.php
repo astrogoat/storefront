@@ -7,12 +7,12 @@ use Helix\Lego\Http\Livewire\Models\Index as BaseIndex;
 
 class StorefrontCollectionIndex extends BaseIndex
 {
-    public function model() : string
+    public function model(): string
     {
         return Collection::class;
     }
 
-    public function columns() : array
+    public function columns(): array
     {
         return [
             'title' => 'Title',
@@ -20,7 +20,7 @@ class StorefrontCollectionIndex extends BaseIndex
         ];
     }
 
-    public function mainSearchColumn() : string|false
+    public function mainSearchColumn(): string|false
     {
         return 'title';
     }

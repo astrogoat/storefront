@@ -7,7 +7,7 @@ use Helix\Lego\Bricks\ValueObjects\BrickValueObject;
 
 class Collection extends Brick
 {
-    public function hydrate($value) : BrickValueObject
+    public function hydrate($value): BrickValueObject
     {
         return new CollectionValueObject($value);
     }
@@ -17,7 +17,7 @@ class Collection extends Brick
         return $this->default;
     }
 
-    public function brickView() : string
+    public function brickView(): string
     {
         return 'shopify::bricks.collection';
     }

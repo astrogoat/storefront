@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Astrogoat\Storefront\Models;
 
 use Helix\Fabrick\Icon;
@@ -84,34 +83,34 @@ class Collection extends LegoModel implements Sectionable, Mediable, Metafieldab
             ->doNotGenerateSlugsOnUpdate();
     }
 
-    public function getMedia() : array
+    public function getMedia(): array
     {
         return $this->featured_image ?: [];
     }
 
-    public function mediaCollections() : array
+    public function mediaCollections(): array
     {
         return [
             MediaCollection::name('Featured')->maxFiles(1),
         ];
     }
 
-    public function shouldIndex() : bool
+    public function shouldIndex(): bool
     {
         return $this->indexable;
     }
 
-    public function getIndexedRoute() : string
+    public function getIndexedRoute(): string
     {
         return route('collections.show', $this);
     }
 
-    public static function searchableIcon() : string
+    public static function searchableIcon(): string
     {
         return static::icon();
     }
 
-    public static function searchableIndexRoute() : string
+    public static function searchableIndexRoute(): string
     {
         return route('lego.storefront.collections.index');
     }
@@ -121,22 +120,22 @@ class Collection extends LegoModel implements Sectionable, Mediable, Metafieldab
         return $query->where('title', 'LIKE', '%' . $value . '%');
     }
 
-    public function searchableName() : string
+    public function searchableName(): string
     {
         return $this->title;
     }
 
-    public function searchableDescription() : string
+    public function searchableDescription(): string
     {
         return Str::limit($this->description ?? '', 60);
     }
 
-    public function searchableRoute() : string
+    public function searchableRoute(): string
     {
         return route('lego.storefront.collections.edit', $this);
     }
 
-    public function getPublishedRoute() : string
+    public function getPublishedRoute(): string
     {
         return route('collections.show', $this);
     }

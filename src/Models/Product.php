@@ -16,10 +16,8 @@ use Helix\Lego\Models\Model;
 use Helix\Lego\Models\Traits\CanBePublished;
 use Helix\Lego\Models\Traits\HasMetafields;
 use Helix\Lego\Models\Traits\HasSections;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -46,10 +44,10 @@ class Product extends Model implements Sectionable, Publishable, Indexable, Sear
         'published_at',
     ];
 
-//    public function collections()
-//    {
-//        return $this->belongsToMany(Collection::class, 'storefront_collection_storefront_product');
-//    }
+    //    public function collections()
+    //    {
+    //        return $this->belongsToMany(Collection::class, 'storefront_collection_storefront_product');
+    //    }
 
     public function getShowRoute(array $parameters = []): string
     {
@@ -61,7 +59,7 @@ class Product extends Model implements Sectionable, Publishable, Indexable, Sear
         return route('lego.storefront.products.editor', $this);
     }
 
-    public function editorShowViewRoute(string $layout = null) : string
+    public function editorShowViewRoute(string $layout = null): string
     {
         return route('lego.storefront.products.editor', [
             'product' => $this,
@@ -70,7 +68,7 @@ class Product extends Model implements Sectionable, Publishable, Indexable, Sear
         ]);
     }
 
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom($this->getDisplayKeyName())
@@ -78,7 +76,7 @@ class Product extends Model implements Sectionable, Publishable, Indexable, Sear
             ->doNotGenerateSlugsOnUpdate();
     }
 
-    public static function getDisplayKeyName() : string
+    public static function getDisplayKeyName(): string
     {
         return 'title';
     }
@@ -88,12 +86,12 @@ class Product extends Model implements Sectionable, Publishable, Indexable, Sear
         return $this->belongsTo(Footer::class);
     }
 
-    public function getMedia() : array
+    public function getMedia(): array
     {
         return $this->featured_image ?: [];
     }
 
-    public function mediaCollections() : array
+    public function mediaCollections(): array
     {
         return [
             MediaCollection::name('Featured')->maxFiles(5),
@@ -101,12 +99,12 @@ class Product extends Model implements Sectionable, Publishable, Indexable, Sear
         ];
     }
 
-    public function getPublishedAtKey() : string
+    public function getPublishedAtKey(): string
     {
         return 'published_at';
     }
 
-    public function getPublishedRoute() : string
+    public function getPublishedRoute(): string
     {
         return route('products.show', $this);
     }
@@ -116,12 +114,12 @@ class Product extends Model implements Sectionable, Publishable, Indexable, Sear
         return $this->getPublishedRoute();
     }
 
-    public function shouldIndex() : bool
+    public function shouldIndex(): bool
     {
         return $this->indexable ?: false;
     }
 
-    public static function searchableIcon() : string
+    public static function searchableIcon(): string
     {
         return static::icon();
     }
@@ -131,39 +129,38 @@ class Product extends Model implements Sectionable, Publishable, Indexable, Sear
         return $query->where('title', 'LIKE', "%{$value}%");
     }
 
-    public function searchableName() : string
+    public function searchableName(): string
     {
         return $this->title;
     }
 
-    public function searchableDescription() : string
+    public function searchableDescription(): string
     {
         return $this->meta['description'] ?? $this->slug;
     }
 
-    public function searchableRoute() : string
+    public function searchableRoute(): string
     {
         return route('lego.storefront.products.edit', $this);
     }
 
-    public static function searchableIndexRoute() : string
+    public static function searchableIndexRoute(): string
     {
         return route('lego.storefront.products.index');
     }
 
-    public static function icon() : string
+    public static function icon(): string
     {
         return Icon::SHOPPING_BAG;
     }
 
-    public static function metafieldableTypeSlug() : string
+    public static function metafieldableTypeSlug(): string
     {
         return Str::slug(static::displayName());
     }
 
-    public function getSectionTitleAttribute() : string
+    public function getSectionTitleAttribute(): string
     {
         return Arr::get($this->meta ?? null, 'page_title') ?: $this->title;
     }
-
 }

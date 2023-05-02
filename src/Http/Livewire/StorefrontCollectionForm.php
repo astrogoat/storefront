@@ -65,7 +65,7 @@ class StorefrontCollectionForm extends Form
         }
     }
 
-    protected function getProductsForCollectionCombobox() : array
+    protected function getProductsForCollectionCombobox(): array
     {
         return Product::all()->map(fn (Product $product) => [
             'key' => $product->id,
@@ -108,7 +108,7 @@ class StorefrontCollectionForm extends Form
         return 'storefront::models.collections.form';
     }
 
-    public function model() : string
+    public function model(): string
     {
         return Collection::class;
     }
@@ -118,7 +118,7 @@ class StorefrontCollectionForm extends Form
         return Footer::all()->pluck('title', 'id');
     }
 
-    public function getPublishableModel() : Publishable
+    public function getPublishableModel(): Publishable
     {
         return $this->model;
     }
