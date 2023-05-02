@@ -8,7 +8,7 @@ use Illuminate\Validation\Rule;
 
 class StorefrontSettings extends AppSettings
 {
-     public string $currency;
+    public string $currency;
 
     public function rules(): array
     {
@@ -26,7 +26,6 @@ class StorefrontSettings extends AppSettings
     //     return ['access_token'];
     // }
 
-
     public function description(): string
     {
         return 'Interact with Storefront.';
@@ -39,7 +38,7 @@ class StorefrontSettings extends AppSettings
 
     public function currencyOptions()
     {
-        return array (
+        return [
             'ALL' => 'Albania Lek',
             'AFN' => 'Afghanistan Afghani',
             'ARS' => 'Argentina Peso',
@@ -154,7 +153,7 @@ class StorefrontSettings extends AppSettings
             'VEF' => 'Venezuela Bolivar',
             'VND' => 'Viet Nam Dong',
             'YER' => 'Yemen Rial',
-            'ZWD' => 'Zimbabwe Dollar'
-        );
+            'ZWD' => 'Zimbabwe Dollar',
+        ];
     }
 }

@@ -13,7 +13,7 @@ class StoreOrder extends Model
         // TODO: Implement icon() method.
     }
 
-    public static function getDisplayKeyName() : string
+    public static function getDisplayKeyName(): string
     {
         return 'customer_name';
     }

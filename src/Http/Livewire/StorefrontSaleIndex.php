@@ -2,18 +2,17 @@
 
 namespace Astrogoat\Storefront\Http\Livewire;
 
-use Astrogoat\Storefront\Models\StoreOrder;
 use Astrogoat\Storefront\Models\StoreSale;
 use Helix\Lego\Http\Livewire\Models\Index as BaseIndex;
 
 class StorefrontSaleIndex extends BaseIndex
 {
-    public function model() : string
+    public function model(): string
     {
         return StoreSale::class;
     }
 
-    public function columns() : array
+    public function columns(): array
     {
         return [
             'reference' => 'Reference',
@@ -25,7 +24,7 @@ class StorefrontSaleIndex extends BaseIndex
         ];
     }
 
-    public function mainSearchColumn() : string|false
+    public function mainSearchColumn(): string|false
     {
         return 'customer_name';
     }
