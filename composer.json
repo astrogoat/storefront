@@ -1,8 +1,8 @@
 {
-    "name": "astrogoat/storefront",
+    "name": "vibraniuum/storefront",
     "description": "A Storefront app for Strata",
     "keywords": [
-        "astrogoat",
+        "vibraniuum",
         "laravel",
         "storefront"
     ],
