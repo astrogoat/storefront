@@ -2,12 +2,15 @@
 
 namespace Astrogoat\Storefront;
 
+use Astrogoat\Storefront\Http\Livewire\StorefrontOrderCreateForm;
 use Astrogoat\Storefront\Http\Livewire\StorefrontOrderForm;
 use Astrogoat\Storefront\Http\Livewire\StorefrontOrderIndex;
 use Astrogoat\Storefront\Http\Livewire\StorefrontProductForm;
 use Astrogoat\Storefront\Http\Livewire\StorefrontProductIndex;
 use Astrogoat\Storefront\Http\Livewire\StorefrontCollectionForm;
 use Astrogoat\Storefront\Http\Livewire\StorefrontCollectionIndex;
+use Astrogoat\Storefront\Http\Livewire\StorefrontSaleForm;
+use Astrogoat\Storefront\Http\Livewire\StorefrontSaleIndex;
 use Astrogoat\Storefront\Models\Collection;
 use Astrogoat\Storefront\Models\Product;
 use Astrogoat\Storefront\Models\StoreOrder;
@@ -47,6 +50,7 @@ class StorefrontServiceProvider extends PackageServiceProvider
                             Link::to(route('lego.storefront.products.index'), 'Products'),
                             Link::to(route('lego.storefront.collections.index'), 'Collections'),
                             Link::to(route('lego.storefront.orders.index'), 'Orders'),
+                            Link::to(route('lego.storefront.sales.index'), 'Sales'),
                         ],
                         Icon::TRUCK,
                     )->after('Pages'),
@@ -82,6 +86,10 @@ class StorefrontServiceProvider extends PackageServiceProvider
         Livewire::component('astrogoat.storefront.http.livewire.storefront-product-form', StorefrontProductForm::class);
         Livewire::component('astrogoat.storefront.http.livewire.storefront-order-index', StorefrontOrderIndex::class);
         Livewire::component('astrogoat.storefront.http.livewire.storefront-order-form', StorefrontOrderForm::class);
+        Livewire::component('astrogoat.storefront.http.livewire.storefront-order-create', StorefrontOrderCreateForm::class);
+
+        Livewire::component('astrogoat.storefront.http.livewire.storefront-sale-index', StorefrontSaleIndex::class);
+        Livewire::component('astrogoat.storefront.http.livewire.storefront-sale-form', StorefrontSaleForm::class);
 
     }
 }

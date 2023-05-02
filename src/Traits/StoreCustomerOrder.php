@@ -11,6 +11,8 @@ trait StoreCustomerOrder
     public $customer;
     public $address;
 
+    public $order;
+
     protected $rules = [
         'customer.name' => 'required|min:6',
         'customer.email' => 'required|email',
@@ -69,5 +71,10 @@ trait StoreCustomerOrder
                 'quantity' => 1
             ]);
         }
+    }
+
+    public function getStoreOrderByReference($reference)
+    {
+        $this->order = StoreOrder::where('reference', $reference)->first();
     }
 }

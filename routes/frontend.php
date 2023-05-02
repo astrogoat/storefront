@@ -1,5 +1,6 @@
 <?php
 
+use Astrogoat\Storefront\Http\Controllers\StorefrontOrderController;
 use Illuminate\Support\Facades\Route;
 use Astrogoat\Storefront\Http\Controllers\StorefrontCollectionController;
 use Astrogoat\Storefront\Http\Controllers\StorefrontProductController;
@@ -16,5 +17,13 @@ Route::group([
     'prefix' => 'collections'
 ], function () {
     Route::get('{collection:slug}', [StorefrontCollectionController::class, 'show'])->name('show');
+});
+
+Route::group([
+    'as' => 'orders.',
+    'prefix' => 'orders'
+], function () {
+    Route::get('/{storeOrder}/invoice', [StorefrontOrderController::class, 'invoice'])->name('invoice');
+    Route::get('/{reference}/track', [StorefrontOrderController::class, 'track'])->name('track');
 });
 

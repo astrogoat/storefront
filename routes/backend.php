@@ -1,7 +1,11 @@
 <?php
 
+use Astrogoat\Storefront\Http\Controllers\StorefrontOrderController;
 use Astrogoat\Storefront\Http\Livewire\StorefrontCollectionForm;
 use Astrogoat\Storefront\Http\Livewire\StorefrontCollectionIndex;
+use Astrogoat\Storefront\Http\Livewire\StorefrontOrderCreateForm;
+use Astrogoat\Storefront\Http\Livewire\StorefrontSaleForm;
+use Astrogoat\Storefront\Http\Livewire\StorefrontSaleIndex;
 use Illuminate\Support\Facades\Route;
 use Astrogoat\Storefront\Http\Controllers\StorefrontCollectionController;
 use Astrogoat\Storefront\Http\Livewire\StorefrontOrderForm;
@@ -39,9 +43,16 @@ Route::group([
         'prefix' => 'orders'
     ], function () {
         Route::get('/', StorefrontOrderIndex::class)->name('index');
-        Route::get('/create', StorefrontOrderForm::class)->name('create');
+        Route::get('/create', StorefrontOrderCreateForm::class)->name('create');
         Route::get('/{storeOrder}/edit', StorefrontOrderForm::class)->name('edit');
-//        Route::get('/{storeOrder}/editor/{editor_view?}', [StorefrontCollectionController::class, 'editor'])->name('editor');
+    });
+
+    Route::group([
+        'as' => 'sales.',
+        'prefix' => 'sales'
+    ], function () {
+        Route::get('/', StorefrontSaleIndex::class)->name('index');
+        Route::get('/{storeSale}/edit', StorefrontSaleForm::class)->name('edit');
     });
 });
 

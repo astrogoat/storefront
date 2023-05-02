@@ -18,6 +18,7 @@ class CreateStorefrontProductsTable extends Migration
             $table->string('layout')->nullable();
             $table->string('title');
             $table->string('slug');
+            $table->integer('quantity');
             $table->boolean('indexable')->default(true);
             $table->json('meta')->nullable();
             $table->json('options')->nullable();

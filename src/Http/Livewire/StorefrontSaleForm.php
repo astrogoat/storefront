@@ -12,38 +12,34 @@ use LaravelDaily\Invoices\Classes\Buyer;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Invoice;
 
-class StorefrontOrderForm extends Form
+class StorefrontSaleForm extends Form
 {
+
+//    public $status;
 
     public function rules()
     {
         return [
-            'model.status' => 'required'
+            'model.order.status' => 'required'
         ];
     }
 
-    public function mount($storeOrder = null)
+    public function mount($storeSale = null)
     {
-        $this->setModel($storeOrder);
+        $this->setModel($storeSale);
 
         if (! $this->model->exists) {
             $this->model->indexable = true;
             $this->model->layout = array_key_first(siteLayouts());
         }
+
+        $this->status = $this->model->order->status;
     }
 
     public function saving()
     {
-        if($this->model->status === 'delivered') {
-            // check if a sale already exists with order id
-            // if not, create one, it exists; ignore.
-            $sale = StoreSale::where('order_id', $this->model->id)->first();
-            if(is_null($sale)) {
-                StoreSale::create([
-                    'order_id' => $this->model->id
-                ]);
-            }
-        }
+            $sale = StoreSale::where('order_id', $this->model->order->id)->first();
+            $sale->delete();
     }
 
     public function updated($property, $value)
@@ -53,12 +49,12 @@ class StorefrontOrderForm extends Form
 
     public function view()
     {
-        return 'storefront::models.orders.form';
+        return 'storefront::models.sales.form';
     }
 
     public function model() : string
     {
-        return StoreOrder::class;
+        return StoreSale::class;
     }
 
     public function hasCompletedPayment()
@@ -68,7 +64,7 @@ class StorefrontOrderForm extends Form
             return false;
         }
 
-        return $payments?->first()?->status === 'success';
+        return $payments->first()->status === 'success';
     }
 
 }

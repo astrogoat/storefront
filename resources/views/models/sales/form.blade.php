@@ -1,8 +1,8 @@
 <x-fab::layouts.page
-    :title="'#'.$model->reference ?: 'Untitled'"
+    :title="$model->order->reference ?: 'Untitled'"
     :breadcrumbs="[
             ['title' => 'Home', 'url' => route('lego.dashboard')],
-            ['title' => 'Orders', 'url' => route('lego.storefront.orders.index')],
+            ['title' => 'Sales', 'url' => route('lego.storefront.sales.index')],
             ['title' => $model->reference ?: 'Untitled'],
         ]"
     x-data=""
@@ -35,19 +35,19 @@
                                 <div class="flex justify-between sm:block">
                                     <dt class="font-medium text-gray-900">Date placed</dt>
                                     <dd class="sm:mt-1">
-                                        <time datetime="2021-01-22">{{ $model->created_at->toFormattedDateString() }}</time>
+                                        <time datetime="2021-01-22">{{ $model->order->created_at->toFormattedDateString() }}</time>
                                     </dd>
                                 </div>
                                 <div class="flex justify-between sm:block">
                                     <dt class="font-medium text-gray-900">Order number</dt>
-                                    <dd class="sm:mt-1">#{{ $model->reference }}</dd>
+                                    <dd class="sm:mt-1">#{{ $model->order->reference }}</dd>
                                 </div>
                                 <div class="flex justify-between font-medium text-gray-900 sm:block sm:pt-0">
                                     <dt>Total amount</dt>
                                     @php
                                         $total = 0;
-                                        $currency = $model->payments?->first()->currency ?? '';
-                                        foreach ($model->orderedProducts as $orderRecord) {
+                                        $currency = $model->order->payments?->first()->currency ?? '';
+                                        foreach ($model->order->orderedProducts as $orderRecord) {
                                             $total = $total + $orderRecord->product->price;
                                         }
                                     @endphp
@@ -57,7 +57,7 @@
                                     <dt class="font-medium text-gray-900">Order status</dt>
                                     <dd class="sm:mt-1">
                                         <x-fab::forms.select
-                                            wire:model="model.status"
+                                            wire:model="model.order.status"
                                         >
                                             <option value="order placed">Order placed</option>
                                             <option value="processing">Processing</option>
@@ -69,19 +69,19 @@
                                 </div>
                                 <div class="flex justify-between sm:block">
                                     <dt class="font-medium text-gray-900">Customer name</dt>
-                                    <dd class="sm:mt-1">{{ $model->customer_name }}</dd>
+                                    <dd class="sm:mt-1">{{ $model->order->customer_name }}</dd>
                                 </div>
                                 <div class="flex justify-between sm:block">
                                     <dt class="font-medium text-gray-900">Customer email</dt>
-                                    <dd class="sm:mt-1">{{ $model->customer_email }}</dd>
+                                    <dd class="sm:mt-1">{{ $model->order->customer_email }}</dd>
                                 </div>
                                 <div class="flex justify-between sm:block">
                                     <dt class="font-medium text-gray-900">Customer phone</dt>
-                                    <dd class="sm:mt-1">{{ $model->customer_phone }}</dd>
+                                    <dd class="sm:mt-1">{{ $model->order->customer_phone }}</dd>
                                 </div>
                                 <div class="flex justify-between sm:block">
                                     <dt class="font-medium text-gray-900">Customer Address</dt>
-                                    <dd class="sm:mt-1">{{ $model->customer_street }}, {{ $model->customer_city }}, {{ $model->customer_state }}, {{ $model->customer_country }}</dd>
+                                    <dd class="sm:mt-1">{{ $model->order->customer_street }}, {{ $model->order->customer_city }}, {{ $model->order->customer_state }}, {{ $model->order->customer_country }}</dd>
                                 </div>
                             </dl>
                         </div>
@@ -102,7 +102,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200 border-b border-gray-200 text-sm sm:border-t">
                             @php
-                                $orderRecords = $this->model->orderedProducts ?? collect([]);
+                                $orderRecords = $this->model->order->orderedProducts ?? collect([]);
                             @endphp
                             @foreach ($orderRecords as $orderRecord)
                                 <tr>
@@ -145,7 +145,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200 border-b border-gray-200 text-sm sm:border-t">
                             @php
-                                $paymentRecords = $this->model->payments ?? collect([]);
+                                $paymentRecords = $this->model->order->payments ?? collect([]);
                             @endphp
                             @foreach ($paymentRecords as $paymentRecord)
                                 <tr>

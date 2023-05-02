@@ -3,13 +3,14 @@
 namespace Astrogoat\Storefront\Http\Livewire;
 
 use Astrogoat\Storefront\Models\StoreOrder;
+use Astrogoat\Storefront\Models\StoreSale;
 use Helix\Lego\Http\Livewire\Models\Index as BaseIndex;
 
-class StorefrontOrderIndex extends BaseIndex
+class StorefrontSaleIndex extends BaseIndex
 {
     public function model() : string
     {
-        return StoreOrder::class;
+        return StoreSale::class;
     }
 
     public function columns() : array
@@ -31,7 +32,7 @@ class StorefrontOrderIndex extends BaseIndex
 
     public function render()
     {
-        return view('storefront::models.orders.index', [
+        return view('storefront::models.sales.index', [
             'models' => $this->getModels(),
         ])->extends('lego::layouts.lego')->section('content');
     }

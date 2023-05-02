@@ -13,6 +13,11 @@ class StoreOrder extends Model
         // TODO: Implement icon() method.
     }
 
+    public static function getDisplayKeyName() : string
+    {
+        return 'customer_name';
+    }
+
     public function payments()
     {
         return $this->hasMany(StorePayment::class, 'order_id', 'id');
