@@ -59,9 +59,17 @@
 
         <x-fab::layouts.panel title="PRICING">
             <x-fab::forms.input
-                label="Product Amount ($)"
+                label="Product Amount ({{ app(\Astrogoat\Storefront\Settings\StorefrontSettings::class)->currency }})"
                 wire:model="model.price"
                 help="The amount this product would be sold for."
+            />
+        </x-fab::layouts.panel>
+
+        <x-fab::layouts.panel title="Stock">
+            <x-fab::forms.input
+                label="Stock Quantity"
+                wire:model="model.quantity"
+                help="The stock quantity available for sale."
             />
         </x-fab::layouts.panel>
 

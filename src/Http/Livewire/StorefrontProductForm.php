@@ -22,6 +22,7 @@ class StorefrontProductForm extends Form
             'model.meta.description' => 'nullable',
             'model.meta.features' => 'nullable',
             'model.price' => 'nullable',
+            'model.quantity' => 'required',
             'model.indexable' => 'nullable',
             'model.layout' => 'nullable',
             'model.footer_id' => 'nullable',
