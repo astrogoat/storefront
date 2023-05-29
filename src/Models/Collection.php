@@ -105,6 +105,11 @@ class Collection extends LegoModel implements Sectionable, Mediable, Metafieldab
         return route('collections.show', $this);
     }
 
+    public function getEditRoute(): string
+    {
+        return route('lego.storefront.collections.edit', $this);
+    }
+
     public static function searchableIcon(): string
     {
         return static::icon();

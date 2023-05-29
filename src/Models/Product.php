@@ -54,6 +54,11 @@ class Product extends Model implements Sectionable, Publishable, Indexable, Sear
         return route('products.show', $this);
     }
 
+    public function getEditRoute(): string
+    {
+        return route('lego.storefront.products.edit', $this);
+    }
+
     public function getEditorRoute(): string
     {
         return route('lego.storefront.products.editor', $this);

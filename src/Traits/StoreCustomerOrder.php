@@ -59,7 +59,7 @@ trait StoreCustomerOrder
         $payment = StorePayment::create([
             'order_id' => $order->id,
             'status' => 'pending',
-            'amount' => $this->getTotal() * 100,
+            'amount' => $this->getTotal(),
             'method' => 'momo',
             'reference' => $transactionReference,
         ]);

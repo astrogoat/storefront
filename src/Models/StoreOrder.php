@@ -18,6 +18,11 @@ class StoreOrder extends Model
         return 'customer_name';
     }
 
+    public function getEditRoute(): string
+    {
+        return route('lego.storefront.orders.edit', $this);
+    }
+
     public function payments()
     {
         return $this->hasMany(StorePayment::class, 'order_id', 'id');
