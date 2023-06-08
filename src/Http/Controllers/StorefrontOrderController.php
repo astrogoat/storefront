@@ -2,7 +2,10 @@
 
 namespace Astrogoat\Storefront\Http\Controllers;
 
+use Astrogoat\Paystack\Settings\PaystackSettings;
 use Astrogoat\Storefront\Models\StoreOrder;
+use Astrogoat\Storefront\Settings\StorefrontSettings;
+use Astrogoat\Storefront\Storefront;
 use Helix\Lego\Settings\ContactInformationSettings;
 use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
@@ -13,7 +16,7 @@ class StorefrontOrderController
     public function invoice(StoreOrder $storeOrder)
     {
         $client = new Party([
-            'name' => 'Roosevelt Lloyd',
+            'name' => tenant()->name,
             'phone' => app(ContactInformationSettings::class)->contact_phone_number,
             'custom_fields' => [
                 'email' => app(ContactInformationSettings::class)->contact_email,
@@ -50,8 +53,8 @@ class StorefrontOrderController
             ->date(now()->subWeeks(3))
             ->dateFormat('m/d/Y')
 //            ->payUntilDays(14)
-            ->currencySymbol($storeOrder->payments->first()->currency)
-            ->currencyCode($storeOrder->payments->first()->currency)
+            ->currencySymbol(settings(StorefrontSettings::class, 'currency'))
+            ->currencyCode(settings(StorefrontSettings::class, 'currency'))
             ->currencyFormat('{SYMBOL}{VALUE}')
             ->currencyThousandsSeparator(',')
             ->currencyDecimalPoint('.')

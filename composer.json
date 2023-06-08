@@ -23,7 +23,6 @@
     ],
     "require": {
         "php": "^8.0",
-        "astrogoat/strata": "^0.2.7",
         "illuminate/contracts": "^8.37 || ^9.9",
         "laraveldaily/laravel-invoices": "^3.0",
         "spatie/laravel-package-tools": "^1.4.3"

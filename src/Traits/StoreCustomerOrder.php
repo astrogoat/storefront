@@ -41,7 +41,7 @@ trait StoreCustomerOrder
         return false;
     }
 
-    public function storeOrder($transactionReference): void
+    public function storeOrder($transactionReference, bool $is_free = false): void
     {
         // save order
         $order = StoreOrder::create([
@@ -58,9 +58,9 @@ trait StoreCustomerOrder
         // save payment
         $payment = StorePayment::create([
             'order_id' => $order->id,
-            'status' => 'pending',
+            'status' => $is_free ? 'success' : 'pending',
             'amount' => $this->getTotal(),
-            'method' => 'momo',
+            'method' => $is_free ? 'free' :'momo',
             'reference' => $transactionReference,
         ]);
 
