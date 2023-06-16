@@ -111,12 +111,12 @@
                                             <img src="{{ $orderRecord->product?->getFirstMedia('Carousel')->getUrl() }}" alt="Detail of mechanical pencil tip with machined black steel shaft and chrome lead tip." class="mr-4 h-16 w-16 rounded object-cover object-center">
                                             <div>
                                                 <div class="font-medium text-gray-900">{{ $orderRecord->product?->title ?: 'Product no longer exists' }}</div>
-                                                <div class="mt-1 sm:hidden">${{ $orderRecord->product?->price }}</div>
+                                                <div class="mt-1 sm:hidden">${{ $orderRecord->product?->price ?: '0' }}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="py-6 pr-8 sm:table-cell">${{ $orderRecord->product?->price }}</td>
-                                    <td class="py-6 pr-8 sm:table-cell">{{ $orderRecord->quantity }}</td>
+                                    <td class="py-6 pr-8 sm:table-cell">${{ $orderRecord->product?->price ?: '0' }}</td>
+                                    <td class="py-6 pr-8 sm:table-cell">{{ $orderRecord->quantity ?: '0' }}</td>
 {{--                                    <td class="py-6 pr-8 sm:table-cell"><span class="capitalize">{{ $orderRecord->order->status }}</span> {{ $orderRecord->updated_at->toFormattedDateString() }}</td>--}}
                                     <td class="whitespace-nowrap py-6 text-right font-medium">
                                         @unless(!$orderRecord->product)
