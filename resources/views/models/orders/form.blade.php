@@ -48,7 +48,8 @@
                                         $total = 0;
                                         $currency = $model->payments?->first()->currency ?? '';
                                         foreach ($model->orderedProducts as $orderRecord) {
-                                            $total = $total + $orderRecord->product->price;
+                                            $price = $orderRecord->product?->price ?: 0;
+                                            $total = $total + $price;
                                         }
                                     @endphp
                                     <dd class="sm:mt-1">{{ $currency }}<b>{{ $total }}</b></dd>
