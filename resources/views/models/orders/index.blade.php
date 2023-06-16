@@ -46,7 +46,7 @@
                     <x-fab::lists.table.column>
                         @php
                             $products = $order->orderedProducts->map(function($item) {
-                                return $item->product->title;
+                                return $item->product?->title;
                             });
                         @endphp
                         <a href="{{ route('lego.storefront.orders.edit', $order) }}">{{ $products->implode(',') }}</a>
